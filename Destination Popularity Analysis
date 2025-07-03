@@ -1,0 +1,56 @@
+1.Dummy Data
+
+import pandas as pd
+
+data = {
+    'Destination': [
+        'Paris', 'London', 'New York', 'Tokyo', 'Rome',
+        'Paris', 'Tokyo', 'Paris', 'New York', 'Rome',
+        'London', 'Paris', ' Rome', 'Tokyo', 'London',
+        'Paris', 'New York', 'Tokyo', 'Rome', 'London'
+    ]
+}
+
+df = pd.DataFrame(data)
+
+2. Top 5 Destinations (Bar Chart & Pie Chart)
+
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Count destination frequency
+destination_counts = df['Destination'].value_counts().head(5)
+
+# Bar Chart
+plt.figure(figsize=(8, 5))
+sns.barplot(x=destination_counts.index, y=destination_counts.values, palette='pastel')
+plt.title("Top 5 Most Booked Destinations - Bar Chart")
+plt.ylabel("Number of Bookings")
+plt.xlabel("Destination")
+plt.tight_layout()
+plt.show()
+
+# Pie Chart
+plt.figure(figsize=(6, 6))
+plt.pie(destination_counts, labels=destination_counts.index, autopct='%1.1f%%', colors=sns.color_palette('pastel'))
+plt.title("Top 5 Most Booked Destinations - Pie Chart")
+plt.tight_layout()
+plt.show()
+
+3.Data Insights
+
+total_bookings = len(df)
+most_booked = destination_counts.idxmax()
+most_booked_count = destination_counts.max()
+
+print("📌 Total Bookings:", total_bookings)
+print("🏆 Most Popular Destination:", most_booked)
+print(f"📈 {most_booked} accounts for {round((most_booked_count/total_bookings)*100, 2)}% of all bookings.")
+
+4.Output
+📌 Total Bookings: 20
+🏆 Most Popular Destination: Paris
+📈 Paris accounts for 25.0% of all bookings.
+
+
+
